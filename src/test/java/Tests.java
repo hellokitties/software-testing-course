@@ -6,14 +6,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 public class Tests extends TestBase{
-    private final static String PAGE_URL = "http://localhost/litecart/public_html/admin/";
+    private final static String PAGE_URL_ADMIN = "http://localhost/litecart/public_html/admin/";
+    private final static String PAGE_URL_MAIN = "http://localhost/litecart/public_html";
     private final static String LOGIN = "admin";
     private final static String PASSWORD = "admin";
 
 
     @Test
     public void login() {
-        driver.get(PAGE_URL);
+        driver.get(PAGE_URL_ADMIN);
         driver.findElement(By.cssSelector("[name=\"username\"]")).sendKeys(LOGIN);
         driver.findElement(By.cssSelector("[name=\"password\"]")).sendKeys(PASSWORD);
         driver.findElement(By.cssSelector("[name=\"login\"]")).click();
@@ -55,6 +56,15 @@ public class Tests extends TestBase{
                 Assert.assertTrue("The page should contains 'h' tag", areElementsPresent(driver, By.cssSelector("#content h1")));
 
             }
+        }
+    }
+
+    @Test
+    public void testStickers() {
+        driver.get(PAGE_URL_MAIN);
+        List<WebElement> products = driver.findElements(By.cssSelector(".content .product"));
+        for (WebElement product : products) {
+            Assert.assertEquals("Product should contain only one sticker", product.findElements(By.cssSelector(".sticker")).size(), 1);
         }
     }
 
