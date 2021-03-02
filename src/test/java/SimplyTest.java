@@ -8,7 +8,6 @@ public class SimplyTest {
 
     @Test
     public void test(){
-        System.setProperty("webdriver.chrome.driver", "C:\\driver\\chromedriver.exe");
         WebDriver driver=new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
